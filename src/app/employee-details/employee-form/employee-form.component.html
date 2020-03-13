@@ -1,0 +1,141 @@
+<button type="button" mdbBtn color="primary" rounded="true" (click)="frame.show()" 
+    mdbWavesEffect>Add New</button>
+
+<div mdbModal #frame="mdbModal" class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add Record</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <form #form="ngForm" autocomplete="off" (submit)="insertRecord(form)">
+            <input type="hidden" name="Code" [value]="service.formData.Code">
+        
+            <!--First Name-->
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-user-circle" 
+                            [class.green-icon]="FirstName.valid" 
+                            [class.red-icon]="FirstName.invalid && FirstName.touched"></i>
+                        </div>
+                    </div>
+                    <input type="text" name="FirstName" 
+                    #FirstName="ngModel" 
+                    [(ngModel)]= "service.formData.FirstName" 
+                    class="form-control" 
+                    placeholder="First Name" required>
+                </div>        
+            </div>
+            <!--Last Name-->
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-user-circle" 
+                            [class.green-icon]="LastName.valid" 
+                            [class.red-icon]="LastName.invalid && LastName.touched"></i>
+                        </div>
+                    </div>
+                    <!-- <input type="text" name="LastName" 
+                    #LastName="ngModel" 
+                    [(ngModel)]= "service.formData.LastName" 
+                    class="form-control" 
+                    placeholder="Last Name" required> -->
+                    <input type="text" name="LastName" #LastName="ngModel" [(ngModel)]= "service.formData.LastName" 
+                    class="form-control" 
+                    placeholder="Last Name" required>
+                </div>        
+            </div>
+            <!--Employee Type-->
+            <div class="form-control">
+                    <label>Select Employee Type</label>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <!-- <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-user-circle" 
+                            [class.green-icon]="Type.valid" 
+                            [class.red-icon]="Type.invalid && Type.touched"></i>
+                        </div>
+                    </div> -->
+                    <div class="form-control">
+                        <input type="radio" value="Contractor" name="Type" #Type="ngModel" 
+                        [(ngModel)]="service.formData.Type" class="radio" required> 
+                        <label> Contractor</label>
+                    </div>
+                    <div class="form-control">
+                        <input type="radio" value="Payroll" name="Type" #Type="ngModel" 
+                        [(ngModel)]="service.formData.Type" class="radio" required>
+                        <label> Payroll</label>
+                    </div>
+                     <!-- <input type="radio" #Type="ngModel" name="Contractor" id="1" class="form-control" 
+                    [(ngModel)]="service.formData.Type" [value]="Contractor" required> Contractor
+                    <input type="radio" #Type="ngModel" name="Payroll" id="2" class="form-control" 
+                    [(ngModel)]="service.formData.Type" [value]="Payroll" required> Payroll -->
+                </div>        
+            </div>
+            <!--Vehicle Type-->
+            <div class="form-control">
+                    <label>Select Vehicle</label>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <!-- <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-user-circle" 
+                            [class.green-icon]="Type.valid" 
+                            [class.red-icon]="Type.invalid && Type.touched"></i>
+                        </div>
+                    </div> -->
+                    <div class="form-control">
+                        <input type="checkbox" name="Two" #Two="ngModel" [(ngModel)]="service.formData.TwoWheeler"> Two Wheeler
+                        <!-- <mat-checkbox name="Two" #Two="ngModel" [(ngModel)]="formData.TwoWheeler">Two Wheeler</mat-checkbox> -->
+                    </div>
+                    <div class="form-control">
+                        <input type="checkbox" name="Four" #Four="ngModel" [(ngModel)]="service.formData.FourWheeler"> Four Wheeler
+                    </div>
+                </div>
+            </div>
+            <!--Department-->
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text bg-white">
+                            <i class="far fa-user-circle" 
+                            [class.green-icon]="Department.valid" 
+                            [class.red-icon]="Department.invalid && Department.touched"></i>
+                        </div>
+                    </div>
+                    <select class="form-control" name="Department" #Department="ngModel" 
+                    [(ngModel)] = "service.formData.Department" required>
+                        <option value="" selected disabled>Select Department</option>
+                        <option value="IT">IT</option>
+                        <option value="HR">HR</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Sales">Sales</option>
+                        <option value="Marketing">Marketing</option>
+                    </select>
+                    <!-- <input type="text" name="Department" 
+                    #Department="ngModel" 
+                    [(ngModel)]= "service.formData.Department" 
+                    class="form-control" 
+                    placeholder="Department" required> -->
+                </div>        
+            </div>
+            <!--Submit Button-->
+            <div class="form-group">
+                <button mdbBtn class="btn btn-success btn-lg btn-block" 
+                type="submit" [disabled]="form.invalid" (click)="frame.hide()"><i class="fas fa-database"></i> Submit</button>
+            </div>
+        </form>
+    </div>
+      </div>
+  </div>
+</div>
